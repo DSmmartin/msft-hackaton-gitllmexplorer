@@ -53,15 +53,3 @@ source .venv/bin/activate
 ```bash
 uv run ./src/main.py
 ```
-
-## Roadmap
-
-- [🔨] Improve the Git Exploratory analisis. `primary` `in progress`
-  1. How many active branches?
-  2. What is the branch strategy?
-  3. What is the Git Flow?
-- [ ] Package the tool in a cli library. `secondary`
-- [ ] Improve documentation and examples with Sphinx. `secondary`
-- [ ] Build a TUI for the tool (the Textual library). `secondary`
-- [ ] Add unit tests for core functionalities. `tertiary`
-- [💡] Build a RAG with the book "PRO GIT" by Scott Chacon and Ben Straub. `secondary` `idea`
