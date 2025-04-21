@@ -1,7 +1,9 @@
 # msft-hackaton-gitllmexplorer
 Project for the AI Agents Microsoft Hackaton
 
-## To Contribute
+Goal: Create a CLI Tool that allows users to understand Git Repositories using LLM's Agents.
+
+## Contribute
 
 ### Setting up the environment with `uv`
 
@@ -26,7 +28,7 @@ uv --version
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/msft-hackaton-gitllmexplorer.git
+git clone https://github.com/DSmmartin/msft-hackaton-gitllmexplorer.git
 cd msft-hackaton-gitllmexplorer
 ```
 
@@ -49,5 +51,5 @@ source .venv/bin/activate
 5. Execute the following command to run the app:
 
 ```bash
-uv run main.py
+uv run ./src/main.py
 ```
