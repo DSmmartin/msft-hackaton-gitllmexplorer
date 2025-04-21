@@ -1,7 +1,7 @@
 """ This module contains all the tools that will be provided to the Agents.
 """
 
-from .tool_bash_commands import (
+from .tool_clone_repository import (
     clone_repository,
 )
 
