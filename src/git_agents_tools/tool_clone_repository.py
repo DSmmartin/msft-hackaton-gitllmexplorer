@@ -14,7 +14,7 @@ async def clone_repository(git_url: str) -> str:
         git_url: The URL of the Git repository to clone.
 
     Returns:
-        str: The path to the cloned repository.
+        str: The local path to the cloned repository.
     """
     temp_dir = tempfile.mkdtemp(prefix="git_repo_")
     _ = Repo.clone_from(git_url, temp_dir)
