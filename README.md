@@ -17,6 +17,9 @@ Goal: Create a CLI Tool that allows users to understand Git Repositories using L
 curl -sSf https://install.python-uv.org | sh
 ```
 
+For Mac users follow instructions here:
+https://docs.astral.sh/uv/getting-started/installation/
+
 2. Verify the installation:
 
 ```bash
