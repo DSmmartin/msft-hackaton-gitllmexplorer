@@ -2,7 +2,9 @@ import os
 import requests
 
 
-def get_list_repositories(query: str):
+def get_list_repositories(
+    query: str, sorting_metric: str = "stars", order: str = "desc"
+):
     # TODO set the env variable with the gh token
     token = os.getenv("GITHUB_TOKEN")
 
@@ -12,7 +14,7 @@ def get_list_repositories(query: str):
         "Accept": "application/vnd.github+json",
         "X-GitHub-Api-Version": "2022-11-28",
     }
-    url = f"https://api.github.com/search/repositories?q={query}&sort=stars&order=desc&per_page=10"
+    url = f"https://api.github.com/search/repositories?q={query}&sort={sorting_metric}&order={order}&per_page=10"
 
     # Send request
     response = requests.get(url, headers=headers)
