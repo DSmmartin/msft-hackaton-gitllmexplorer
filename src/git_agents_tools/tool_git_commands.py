@@ -1,29 +1,29 @@
-from agents import function_tool
+from agents import function_tool, RunContextWrapper
+from repository_assets import GitRepositoryLocation
 import subprocess
 import os
 
 
 
 @function_tool
-async def git_commands(bash_code_to_execute: str, local_repository_path: str) -> str:
+async def git_commands(
+    context: RunContextWrapper[GitRepositoryLocation],
+    bash_code_to_execute: str) -> str:
     """Execute Bash Git commands in the context of a local Git repository.
 
        The Bash CLI has installed Git library, use the git commands to explore the repository.`
 
     Args:
         bash_code_to_execute: The Bash commands to execute.
-        local_repository_path: The local path where is the git repository.
 
     Returns:
         str: The output of the executed Bash commands.
     """
 
     try:
-        # Change directory to the repository path
         current_dir = os.getcwd()
-        os.chdir(local_repository_path)
+        os.chdir(context.context.local_path)
 
-        # Execute the bash command and capture output
         process = subprocess.run(
             bash_code_to_execute,
             shell=True,
@@ -32,10 +32,8 @@ async def git_commands(bash_code_to_execute: str, local_repository_path: str) ->
             check=False
         )
 
-        # Return to original directory
         os.chdir(current_dir)
 
-        # Return stdout, or stderr if there was an error
         if process.returncode == 0:
             return process.stdout
         else:
