@@ -10,9 +10,9 @@ from rich.markdown import Markdown
 EXAMPLE_QUESTIONS = [
     # "what is your purpose?",
     # "Could you provide a summary about this repo based on the README.md?. The URL of the repository is: https://github.com/microsoft/promptflow.git",
-    # "What are the current actives branches (understanding active branches as branches that have recent activity) in the following repository? -> /path/to/local_repo/promptflow.",
-    # "What are the last branches (the last 5 ones) that were merged and explain the changes in the following repository? -> /path/to/local_repo/promptflow",
-    # "Given the following local repository path: /path/to/local_repo/promptflow, could you tell me if follows a branching workflow strategy (git flow, github flow, gitlab flow, one flow)? based on the banches names and the commit history? provide a complete report of the git flow strategy.",
+    # "What are the current actives branches (understanding active branches as branches that have recent activity) in the following local repository? -> /home/mmartin/my_projects/promptflow",
+    # "What are the last branches (the last 5 ones) that were merged and explain the changes in the following repository? -> /home/mmartin/my_projects/promptflow",
+    # "Given the following local repository path: /home/mmartin/my_projects/promptflow, could you tell me if follows a branching workflow strategy (git flow, github flow, gitlab flow, one flow)? based on the banches names and the commit history? provide a complete report of the git flow strategy.",
     # "Could you generate a report of the repository? The URL of the repository is: https://github.com/microsoft/promptflow.git"
 ]
 
@@ -23,7 +23,6 @@ async def main():
     input_items: list[TResponseInputItem] = []
     context = GitRepositoryLocation()
 
-    # Display welcome message
     console.print(Panel.fit("🔍 [bold blue]Git Repository Explorer[/bold blue]", border_style="yellow"))
     console.print("[dim]Enter your questions about Git repositories or type 'exit' to quit[/dim]\n")
 
@@ -33,7 +32,6 @@ async def main():
             console.print("[bold green]Exiting the program. Goodbye![/bold green]")
             break
 
-        # Display user question with styling
         console.print(Panel(f"[yellow]{user_input}[/yellow]", title="👤 User Question", border_style="yellow"))
 
         with trace("Git Assistant"):
@@ -44,7 +42,6 @@ async def main():
             input_items = result.to_input_list()
             current_agent = result.last_agent
 
-            # Display agent response with styling and Markdown rendering
             console.print(Panel(
                 Markdown(result.final_output) if result.final_output else "[italic]No response received[/italic]",
                 title="🤖 Git Assistant",
