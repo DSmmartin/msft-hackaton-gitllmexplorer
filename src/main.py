@@ -2,6 +2,9 @@ import asyncio
 from agents import Runner, Agent, TResponseInputItem, trace
 from repository_assets import GitRepositoryLocation
 from git_agents.agent_git_assistant import agent_git_assistant
+from rich.console import Console
+from rich.panel import Panel
+from rich.markdown import Markdown
 
 
 EXAMPLE_QUESTIONS = [
@@ -15,24 +18,39 @@ EXAMPLE_QUESTIONS = [
 
 
 async def main():
+    console = Console()
     current_agent: Agent[GitRepositoryLocation] = agent_git_assistant
     input_items: list[TResponseInputItem] = []
     context = GitRepositoryLocation()
 
+    # Display welcome message
+    console.print(Panel.fit("🔍 [bold blue]Git Repository Explorer[/bold blue]", border_style="yellow"))
+    console.print("[dim]Enter your questions about Git repositories or type 'exit' to quit[/dim]\n")
+
     while True:
-        user_input = input("Enter your question (type 'exit' to quit): ")
+        user_input = input("💬 ")
         if user_input.lower() == 'exit':
-            print("Exiting the program. Goodbye!")
+            console.print("[bold green]Exiting the program. Goodbye![/bold green]")
             break
 
+        # Display user question with styling
+        console.print(Panel(f"[yellow]{user_input}[/yellow]", title="👤 User Question", border_style="yellow"))
+
         with trace("Git Assistant"):
+            console.print("[dim]Processing your request...[/dim]")
             input_items.append({"content": user_input, "role": "user"})
             result = await Runner.run(current_agent, input_items, context=context)
 
             input_items = result.to_input_list()
             current_agent = result.last_agent
-            print("Response:\n", result.final_output)
 
+            # Display agent response with styling and Markdown rendering
+            console.print(Panel(
+                Markdown(result.final_output) if result.final_output else "[italic]No response received[/italic]",
+                title="🤖 Git Assistant",
+                border_style="red"
+            ))
+            console.print("\n")
 
 
 if __name__ == "__main__":
