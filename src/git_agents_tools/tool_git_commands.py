@@ -24,20 +24,20 @@ async def git_commands(
         current_dir = os.getcwd()
         os.chdir(context.context.local_path)
 
-        process = subprocess.run(
+        process = await asyncio.create_subprocess_shell(
             bash_code_to_execute,
             shell=True,
-            capture_output=True,
-            text=True,
-            check=False
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE
         )
 
+        stdout, stderr = await process.communicate()
         os.chdir(current_dir)
 
         if process.returncode == 0:
-            return process.stdout
+            return stdout.decode()
         else:
-            return f"Error (code {process.returncode}): {process.stderr}"
+            return f"Error (code {process.returncode}): {stderr.decode()}"
 
     except Exception as e:
         return f"Exception occurred: {str(e)}"
