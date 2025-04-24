@@ -7,7 +7,7 @@ from repository_assets import GitRepositoryLocation
 GIT_COMMANDS_SYSTEM_PROMPT = """
 You are Git commands executor given a local path git repository make git commands to explore.
 """
-GIT_COMMANDS_MODEL = os.getenv("GIT_COMMANDS_MODEL", "gpt-4o-mini")
+GIT_COMMANDS_MODEL = os.getenv("GIT_COMMANDS_MODEL", "gpt-4.1-mini")
 
 
 agent_git_commands_executor = Agent[GitRepositoryLocation](name="GitCommandsExecutor",
