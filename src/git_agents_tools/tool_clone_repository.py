@@ -7,7 +7,6 @@ from git import Repo
 
 @function_tool
 async def clone_repository(git_url: str) -> str:
-
     """Clone a Git repository from the given URL.
 
     Args:

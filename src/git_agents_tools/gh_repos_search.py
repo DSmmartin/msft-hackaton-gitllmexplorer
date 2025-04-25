@@ -1,5 +1,6 @@
 import os
 import requests
+from agents import function_tool
 
 
 def get_list_repositories(
@@ -18,22 +19,44 @@ def get_list_repositories(
 
     # Send request
     response = requests.get(url, headers=headers)
-
+    results = []
     if response.status_code == 200:
         data = response.json()
 
         # Print results
         print(f"Total repositories found: {data['total_count']}")
-        print(f"Top 10 repositories by stars:")
+        # print(f"Top 10 repositories by stars:")
         for repo in data["items"]:
-            print(f"\nRepository: {repo['full_name']}")
-            print(f"Description: {repo['description']}")
-            print(f"URL: {repo['html_url']}")
-            print(f"Stars: {repo['stargazers_count']}")
+            item = {}
+            # print(f"\nRepository: {repo['full_name']}")
+            item["full_name"] = repo["full_name"]
+            # print(f"Description: {repo['description']}")
+            item["description"] = repo["description"]
+            # print(f"URL: {repo['html_url']}")
+            item["url"] = repo["html_url"]
+            if sorting_metric == "starts":
+                # print(f"Stars: {repo['stargazers_count']}")
+                item["stargazers_count"] = repo["stargazers_count"]
+            results.append(item)
     else:
         print(f"Error: {response.status_code}")
         print(response.text)
+    return results
 
 
-if __name__ == "__main__":
-    get_list_repositories(query="flask")
+@function_tool
+async def get_best_repositories(topic: str, metric: str) -> list:
+    """Uses the REST API from github to get the list of most popular repositories.
+
+    Args:
+        topic: the topic to use in the query
+        metric: popularity metric to use in the github api
+
+    Returns:
+        list: thelist of top 10 repositories according to the provided metric
+    """
+    return get_list_repositories(query=topic, metric="stars")
+
+
+# if __name__ == "__main__":
+#     get_list_repositories(query="flask")
