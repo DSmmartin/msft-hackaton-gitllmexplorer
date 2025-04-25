@@ -11,7 +11,7 @@ async def git_commands(
     bash_code_to_execute: str) -> str:
     """Execute Bash Git commands in the context of a local Git repository.
 
-       The Bash CLI has installed Git library, use the git commands to explore the repository.`
+       The Bash CLI has installed Git library, use the git commands to explore the repository.
 
     Args:
         bash_code_to_execute: The Bash commands to execute.
