@@ -37,7 +37,6 @@ def add_repository_stats(repositories: list):
             # GitHub might respond with 202 if stats are being calculated
             if response.status_code == 202:
                 print(f"Stats being calculated for {repo['full_name']}, waiting...")
-                sleep(2)  # Wait and try again
                 response = requests.get(stats_url, headers=headers)
 
             if response.status_code == 200:

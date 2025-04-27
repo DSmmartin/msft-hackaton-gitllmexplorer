@@ -1,7 +1,6 @@
 import os
 import requests
 from agents import function_tool
-from gh_repo_stats import add_repository_stats
 
 
 def get_list_repositories(

@@ -5,6 +5,7 @@ from git_agents_tools.gh_repos_search import get_best_repositories
 from git_agents.agent_git_commands import agent_git_commands_executor
 from git_agents.agent_generate_response import agent_generate_response
 from git_agents.agent_git_report import agent_git_report
+from git_agents.agent_repos_search import agent_repos_search
 from repository_assets import GitRepositoryLocation
 
 GIT_ASSISTANT_SYSTEM_PROMPT = """
@@ -29,7 +30,10 @@ agent_git_assistant = Agent[GitRepositoryLocation](name="GitAssistant",
                              tool_name="generate_response",
                              tool_description="Use always at the end to respond to the user. This tool generates a structured and guided response when the user asks for information about the repository elements: branches, commits, tags."
                          ),
-                         get_best_repositories
+                         agent_repos_search.as_tool(
+                                tool_name="repos_search",
+                                tool_description="Use this tool when the user asks for a list of repositories based on a topic. The topic is provided by the user.",
+                            ),
                      ],
                      handoffs=[handoff(agent_git_report, tool_description_override="Use this tool when the user asks for a report of the repository")]
                      )
