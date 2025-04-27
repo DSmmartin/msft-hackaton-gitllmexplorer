@@ -12,4 +12,4 @@ agent_repos_search = Agent(name="GithubRepositoriesSearch",
                      model=REPOS_SEARCH_MODEL,
                      instructions=REPOS_SEARCH_SYSTEM_PROMPT,
                      tools=[gh_repos_search],
-                     output_type=list
+                     output_type=list)

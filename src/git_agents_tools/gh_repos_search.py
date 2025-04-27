@@ -45,18 +45,18 @@ def get_list_repositories(
 
 
 @function_tool
-async def get_best_repositories(topic: str, metric: str) -> list:
+async def get_best_repositories(topic: str, sorting_metric: str) -> list:
     """Uses the REST API from github to get the top 10 list of most popular
     repositories according to some metric.
 
     Args:
         topic: the topic to use in the query
-        metric: popularity metric to use in the github api
+        sorting_metric: popularity metric to use in the github api
 
     Returns:
         list: the list of top 10 repositories according to the provided metric
     """
-    return get_list_repositories(query=topic, metric="stars")
+    return get_list_repositories(query=topic, sorting_metric=sorting_metric)
 
 
 # if __name__ == "__main__":
