@@ -10,10 +10,11 @@ from rich.markdown import Markdown
 EXAMPLE_QUESTIONS = [
     # "what is your purpose?",
     # "Could you provide a summary about this repo based on the README.md?. The URL of the repository is: https://github.com/microsoft/promptflow.git",
-    # "What are the current actives branches (understanding active branches as branches that have recent activity) in the following local repository? -> /home/mmartin/my_projects/promptflow",
-    # "What are the last branches (the last 5 ones) that were merged and explain the changes in the following repository? -> /home/mmartin/my_projects/promptflow",
-    # "Given the following local repository path: /home/mmartin/my_projects/promptflow, could you tell me if follows a branching workflow strategy (git flow, github flow, gitlab flow, one flow)? based on the banches names and the commit history? provide a complete report of the git flow strategy.",
-    # "Could you generate a report of the repository? The URL of the repository is: https://github.com/microsoft/promptflow.git"
+    # "What are the current actives branches (understanding active branches as branches that have recent activity) in the following local repository? -> /local/path/promptflow",
+    # "What are the last branches (the last 5 ones) that were merged and explain the changes in the following repository? -> /local/path/promptflow",
+    # "Given the following local repository path: /local/path/promptflow, could you tell me if follows a branching workflow strategy (git flow, github flow, gitlab flow, one flow)? based on the banches names and the commit history? provide a complete report of the git flow strategy.",
+    # "Could you generate a report of the repository? The URL of the repository is: https://github.com/microsoft/promptflow.git",
+    # "could you list some repositories based on the following topic -> python ?"
 ]
 
 
