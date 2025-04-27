@@ -3,7 +3,7 @@ from agents import Agent
 from git_agents_tools import gh_repos_search
 
 REPOS_SEARCH_SYSTEM_PROMPT = """
-You are an Agent that generates a list of top repositories for a given topic and according to a gvien popularity metric.
+You are an Agent that generates a list of top repositories for a given topic and according to a given popularity metric.
 Given the topic and the metric you need to search the top 10 repositories
 """
 REPOS_SEARCH_MODEL = os.getenv("REPOS_SEARCH_MODEL", "gpt-4o-mini")
