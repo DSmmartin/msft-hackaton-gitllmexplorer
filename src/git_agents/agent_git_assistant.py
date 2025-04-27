@@ -1,7 +1,7 @@
 import os
 from agents import Agent, handoff
 from git_agents.agent_repo_setup import agent_repo_setup
-from git_agents.agent_git_commands import agent_git_commands_executor
+from git_agents.agent_git_commands import agent_git_explorer
 from git_agents.agent_generate_response import agent_generate_response
 from git_agents.agent_git_report import agent_git_report
 from repository_assets import GitRepositoryLocation
@@ -20,9 +20,9 @@ agent_git_assistant = Agent[GitRepositoryLocation](name="GitAssistant",
                              tool_name="setup_git_repo",
                              tool_description="Setup git repository if a url or local path is provided, use this tool when it is required to explore the repository.",
                          ),
-                         agent_git_commands_executor.as_tool(
+                         agent_git_explorer.as_tool(
                              tool_name="git_explorer",
-                             tool_description="Use this is an Agent to make tasks in the repository interactively."
+                             tool_description="Use this is an Agent to make exploratory tasks in the repository interactively."
                          ),
                          agent_generate_response.as_tool(
                              tool_name="generate_response",
