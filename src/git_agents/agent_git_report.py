@@ -17,7 +17,7 @@ You are a specialized Agent that generates a git report given a git repository. 
 * How to contribute
 
 
-2. what happens over this recent time highlights
+2. Recent Activity Highlights
 
 * **Summary of Recent Activity**. For example, the new releases or functionalities implemented.
 * **Branch Workflow**: Describe the branch workflow used in the repository (Git Flow, GitHub Flow, GitLabFlow, One Flow...). Include information about the main branch, development branches, feature branches, and any other relevant branches.
