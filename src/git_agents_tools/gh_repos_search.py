@@ -1,6 +1,7 @@
 import os
 import requests
 from agents import function_tool
+from gh_repo_stats import add_repository_stats
 
 
 def get_list_repositories(
@@ -60,4 +61,4 @@ async def get_best_repositories(topic: str, metric: str) -> list:
 
 
 # if __name__ == "__main__":
-#     get_list_repositories(query="flask")
+#     repos = get_list_repositories(query="flask")
