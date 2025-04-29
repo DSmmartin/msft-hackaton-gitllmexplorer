@@ -47,7 +47,7 @@ async def sync_local_repo(
 
     repo = Repo(local_dir_path)
     origin = repo.remotes.origin
-    origin.pull()
+    origin.fetch()
     context.context.local_path = local_dir_path
     context.context.git_url = origin.url
     return GitRepository(

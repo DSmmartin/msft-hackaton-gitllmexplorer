@@ -1,7 +1,5 @@
 import os
 from agents import Agent
-from git_agents.agent_repo_setup import agent_repo_setup
-from git_agents.agent_git_commands import agent_git_commands_executor
 
 GENERATE_RESPONSE_SYSTEM_PROMPT = """
 You are an Agent that your Role is to generate a response for the user based on the information collected.
