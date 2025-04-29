@@ -51,6 +51,10 @@ async def get_repos_statistics(
                 details_response = requests.get(details_url, headers=headers)
                 details = details_response.json()
 
+                try:
+                    license = details.get("license", {}).get("name", "No license")
+                except Exception:
+                    license = "To review"
                 stats_return.append({
                     "full_name": details_url,
                     "commits_last_year": sum(
@@ -63,7 +67,7 @@ async def get_repos_statistics(
                     "subscribers_count": details.get("subscribers_count", 0),
                     "last_update": details.get("updated_at", ""),
                     "language": details.get("language", ""),
-                    "license": details.get("license", {}).get("name", "No license"),
+                    "license": license,
                 })
             else:
                 print(

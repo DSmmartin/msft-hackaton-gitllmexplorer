@@ -1,5 +1,5 @@
 import os
-from agents import Agent, RunResult
+from agents import Agent
 from git_agents_tools import clone_repository, sync_local_repo
 from repository_assets import GitRepository
 
