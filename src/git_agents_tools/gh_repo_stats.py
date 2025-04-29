@@ -75,14 +75,16 @@ def add_repository_stats(repositories: list):
 
 
 @function_tool
-async def get_repos_statistics(repositories: list) -> list:
+async def get_repos_statistics(
+    repositories: List[Dict[str, Any]],
+) -> List[Dict[str, Any]]:
     """Uses the REST API from github to get the statistics from each repository in a list.
-    The list contains 10 repositories and one dictionary for each repository
+    The list contains repositories and one dictionary for each repository
 
     Args:
-        repositories: list with the 10 repositories to add the statistics
+        repositories: list with the repositories to add the statistics
 
     Returns:
-        list: the updated list of the 10 repositories with the statistics information
+        list: the updated list of the repositories with the statistics information
     """
     return add_repository_stats(repositories=repositories)
