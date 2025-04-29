@@ -10,9 +10,10 @@ information to each repository of the list.
 """
 REPOS_SEARCH_MODEL = os.getenv("REPOS_SEARCH_MODEL", "gpt-4o-mini")
 
-agent_repos_search = Agent(name="GithubRepositoriesSearch",
-                     model=REPOS_SEARCH_MODEL,
-                     instructions=REPOS_SEARCH_SYSTEM_PROMPT,
-                     tools=[get_best_repositories, get_repos_statistics],
-                     output_type=list
+agent_repos_search = Agent(
+    name="GithubRepositoriesSearch",
+    model=REPOS_SEARCH_MODEL,
+    instructions=REPOS_SEARCH_SYSTEM_PROMPT,
+    tools=[get_best_repositories, get_repos_statistics],
+    output_type=list,
 )
