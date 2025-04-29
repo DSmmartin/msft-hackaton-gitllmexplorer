@@ -1,16 +1,15 @@
-from typing_extensions import Any
 import tempfile
 
 from agents import function_tool
 from agents import RunContextWrapper
 from git import Repo
 
-from repository_assets import GitRepositoryLocation
+from repository_assets import GitRepository
 
 
 @function_tool
 async def clone_repository(
-    context: RunContextWrapper[GitRepositoryLocation],
+    context: RunContextWrapper[GitRepository],
     git_url: str) -> str:
 
     """Clone a Git repository from the given URL. I.e. the git_url is a string that starts with `https://` or `git@` and ends with `.git`.
@@ -26,7 +25,7 @@ async def clone_repository(
     _ = Repo.clone_from(git_url, temp_dir)
     context.context.local_path = temp_dir
     context.context.git_url = git_url
-    return GitRepositoryLocation(
+    return GitRepository(
         local_path=temp_dir,
         git_url=git_url
     )
@@ -34,7 +33,7 @@ async def clone_repository(
 
 @function_tool
 async def sync_local_repo(
-    context: RunContextWrapper[GitRepositoryLocation],
+    context: RunContextWrapper[GitRepository],
     local_dir_path: str) -> str:
 
     """Sync the local repository with the remote. The local_dir_path is a string that is the local path of the repository (doesn't contain `https://` or `git@`).
@@ -51,7 +50,7 @@ async def sync_local_repo(
     origin.pull()
     context.context.local_path = local_dir_path
     context.context.git_url = origin.url
-    return GitRepositoryLocation(
+    return GitRepository(
         local_path=local_dir_path,
         git_url=origin.url
     )

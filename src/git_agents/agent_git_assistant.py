@@ -1,13 +1,11 @@
 import os
 from agents import Agent, handoff
 from git_agents.agent_repo_setup import agent_repo_setup
-from git_agents_tools.gh_repos_search import get_best_repositories
-from git_agents_tools.gh_repo_stats import get_repos_statistics
 from git_agents.agent_git_commands import agent_git_commands_executor
 from git_agents.agent_generate_response import agent_generate_response
 from git_agents.agent_git_report import agent_git_report
 from git_agents.agent_repos_search import agent_repos_search
-from repository_assets import GitRepositoryLocation
+from repository_assets import GitRepository
 
 GIT_ASSISTANT_SYSTEM_PROMPT = """
 You are a helpful assistant that provides information in order to understand a repository for the user that is the first time they interact with it.
@@ -15,7 +13,7 @@ You are a helpful assistant that provides information in order to understand a r
 GIT_ASSISTANT_MODEL = os.getenv("GIT_ASSISTANT_MODEL", "gpt-4o-mini")
 
 
-agent_git_assistant = Agent[GitRepositoryLocation](
+agent_git_assistant = Agent[GitRepository](
     name="GitAssistant",
     model=GIT_ASSISTANT_MODEL,
     instructions=GIT_ASSISTANT_SYSTEM_PROMPT,

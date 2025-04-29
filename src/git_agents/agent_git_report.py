@@ -2,8 +2,7 @@ import os
 from agents import Agent
 from git_agents.agent_repo_setup import agent_repo_setup
 from git_agents.agent_git_commands import agent_git_commands_executor
-from git_agents.agent_generate_response import agent_generate_response
-from repository_assets import GitRepositoryLocation
+from repository_assets import GitRepository
 
 TIME_HORIZON_MONTHS = 6
 
@@ -18,7 +17,7 @@ The horizon of the report is 6 months, so you have to provide the information of
 GIT_REPORT_MODEL = os.getenv("GIT_REPORT_MODEL", "gpt-4o-mini")
 
 
-agent_git_report = Agent[GitRepositoryLocation](name="GitReport",
+agent_git_report = Agent[GitRepository](name="GitReport",
                      model=GIT_REPORT_MODEL,
                      instructions=GIT_REPORT_SYSTEM_PROMPT,
                      tools=[

@@ -1,6 +1,6 @@
 import asyncio
 from agents import Runner, Agent, TResponseInputItem, trace
-from repository_assets import GitRepositoryLocation
+from repository_assets import GitRepository
 from git_agents.agent_git_assistant import agent_git_assistant
 from rich.console import Console
 from rich.panel import Panel
@@ -20,9 +20,9 @@ EXAMPLE_QUESTIONS = [
 
 async def main():
     console = Console()
-    current_agent: Agent[GitRepositoryLocation] = agent_git_assistant
+    current_agent: Agent[GitRepository] = agent_git_assistant
     input_items: list[TResponseInputItem] = []
-    context = GitRepositoryLocation()
+    context = GitRepository()
 
     console.print(Panel.fit("🔍 [bold blue]Git Repository Explorer[/bold blue]", border_style="yellow"))
     console.print("[dim]Enter your questions about Git repositories or type 'exit' to quit[/dim]\n")
