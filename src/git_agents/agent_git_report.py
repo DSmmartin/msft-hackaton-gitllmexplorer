@@ -1,8 +1,9 @@
 import os
 from agents import Agent
 from git_agents.agent_repo_setup import agent_repo_setup
+from repository_assets import GitRepository
 from git_agents.agent_git_commands import agent_git_explorer
-from repository_assets import GitRepositoryLocation
+
 
 TIME_HORIZON_MONTHS = 6
 
@@ -33,7 +34,7 @@ To generate the report you can follow an incremental approach, gathering informa
 GIT_REPORT_MODEL = os.getenv("GIT_REPORT_MODEL", "gpt-4.1")
 
 
-agent_git_report = Agent[GitRepositoryLocation](name="GitReport",
+agent_git_report = Agent[GitRepository](name="GitReport",
                      model=GIT_REPORT_MODEL,
                      instructions=GIT_REPORT_SYSTEM_PROMPT,
                      tools=[

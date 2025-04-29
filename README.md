@@ -17,6 +17,9 @@ Goal: Create a CLI Tool that allows users to understand Git Repositories using L
 curl -sSf https://install.python-uv.org | sh
 ```
 
+For Mac users follow instructions here:
+https://docs.astral.sh/uv/getting-started/installation/
+
 2. Verify the installation:
 
 ```bash
@@ -53,3 +56,17 @@ source .venv/bin/activate
 ```bash
 uv run ./src/main.py
 ```
+
+## Environment Variables
+
+- `OPENAI_API_KEY`: Your OpenAI API key. This is required for the application to function properly.
+- `GITHUB_TOKEN`: Your GitHub token. This is required for the application to function properly.
+
+### Some other default environment variables
+
+- `__SOME_AGENT_NAME__MODEL`: For each agent, you can set the model to be used each one, could use a different model. The current agents are:
+
+1. GitAssistant. The env variable is `GIT_ASSISTANT_MODEL`, where the default is `gpt-4o-mini`.
+2. GitCommands. The env variable is `GIT_COMMANDS_MODEL`, where the default is `gpt-4.1-mini`.
+3. GitReport. The env variable is `GIT_REPORT_MODEL`, where the default is `gpt-4.1-mini`.
+4. GitSetup. The env variable is `GIT_SETUP_MODEL`, where the default is `gpt-4.1-mini`.

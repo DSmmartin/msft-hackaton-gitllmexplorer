@@ -1,5 +1,5 @@
 from agents import function_tool, RunContextWrapper
-from repository_assets import GitRepositoryLocation
+from repository_assets import GitRepository
 import asyncio
 import os
 
@@ -7,7 +7,7 @@ import os
 
 @function_tool
 async def git_commands(
-    context: RunContextWrapper[GitRepositoryLocation],
+    context: RunContextWrapper[GitRepository],
     bash_code_to_execute: str) -> str:
     """Execute Bash Git commands in the context of a local Git repository.
 

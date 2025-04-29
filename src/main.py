@@ -1,6 +1,6 @@
 import asyncio
 from agents import Runner, Agent, TResponseInputItem, trace
-from repository_assets import GitRepositoryLocation
+from repository_assets import GitRepository
 from git_agents.agent_git_assistant import agent_git_assistant
 from rich.console import Console
 from rich.panel import Panel
@@ -10,18 +10,19 @@ from rich.markdown import Markdown
 EXAMPLE_QUESTIONS = [
     # "what is your purpose?",
     # "Could you provide a summary about this repo based on the README.md?. The URL of the repository is: https://github.com/microsoft/promptflow.git",
-    # "What are the current actives branches (understanding active branches as branches that have recent activity) in the following local repository? -> /home/mmartin/my_projects/promptflow",
-    # "What are the last branches (the last 5 ones) that were merged and explain the changes in the following repository? -> /home/mmartin/my_projects/promptflow",
-    # "Given the following local repository path: /home/mmartin/my_projects/promptflow, could you tell me if follows a branching workflow strategy (git flow, github flow, gitlab flow, one flow)? based on the banches names and the commit history? provide a complete report of the git flow strategy.",
-    # "Could you generate a report of the repository? The URL of the repository is: https://github.com/microsoft/promptflow.git"
+    # "What are the current actives branches (understanding active branches as branches that have recent activity) in the following local repository? -> /local/path/promptflow",
+    # "What are the last branches (the last 5 ones) that were merged and explain the changes in the following repository? -> /local/path/promptflow",
+    # "Given the following local repository path: /local/path/promptflow, could you tell me if follows a branching workflow strategy (git flow, github flow, gitlab flow, one flow)? based on the banches names and the commit history? provide a complete report of the git flow strategy.",
+    # "Could you generate a report of the repository? The URL of the repository is: https://github.com/microsoft/promptflow.git",
+    # "could you list some repositories based on the following topic -> python ?"
 ]
 
 
 async def main():
     console = Console()
-    current_agent: Agent[GitRepositoryLocation] = agent_git_assistant
+    current_agent: Agent[GitRepository] = agent_git_assistant
     input_items: list[TResponseInputItem] = []
-    context = GitRepositoryLocation()
+    context = GitRepository()
 
     console.print(Panel.fit("🔍 [bold blue]Git Repository Explorer[/bold blue]", border_style="yellow"))
     console.print("[dim]Enter your questions about Git repositories or type 'exit' to quit[/dim]\n")
