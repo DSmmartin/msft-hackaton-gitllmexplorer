@@ -1,21 +1,24 @@
 import os
-from agents import Agent, handoff
+from agents import Agent, handoff, OpenAIChatCompletionsModel
 from git_agents.agent_repo_setup import agent_repo_setup
 from git_agents.agent_git_commands import agent_git_explorer
 from git_agents.agent_generate_response import agent_generate_response
 from git_agents.agent_git_report import agent_git_report
 from git_agents.agent_repos_search import agent_repos_search
+from model_client import get_model_client
 from repository_assets import GitRepository
 
 GIT_ASSISTANT_SYSTEM_PROMPT = """
 You are a helpful assistant that provides information in order to understand a repository for the user that is the first time they interact with it.
 """
-GIT_ASSISTANT_MODEL = os.getenv("GIT_ASSISTANT_MODEL", "gpt-4o-mini")
+GIT_ASSISTANT_MODEL = os.getenv("GIT_ASSISTANT_MODEL", "gpt-4.1-mini")
 
 
 agent_git_assistant = Agent[GitRepository](
     name="GitAssistant",
-    model=GIT_ASSISTANT_MODEL,
+    model=OpenAIChatCompletionsModel(
+        model=GIT_ASSISTANT_MODEL, openai_client=get_model_client()
+    ),
     instructions=GIT_ASSISTANT_SYSTEM_PROMPT,
     tools=[
         agent_repo_setup.as_tool(

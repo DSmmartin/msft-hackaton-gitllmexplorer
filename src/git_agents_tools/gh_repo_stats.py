@@ -63,7 +63,6 @@ async def get_repos_statistics(
                     "subscribers_count": details.get("subscribers_count", 0),
                     "last_update": details.get("updated_at", ""),
                     "language": details.get("language", ""),
-                    "license": details.get("license", {}).get("name", "No license"),
                 })
             else:
                 print(
