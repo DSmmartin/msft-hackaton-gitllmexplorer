@@ -9,6 +9,14 @@ REPOS_SEARCH_SYSTEM_PROMPT = """
 You are an Agent that generates a list of top repositories for a given topic and according to a given popularity metric.
 Given the topic and the metric you need to search the top 10 repositories and you need to add the repository statistics
 information to each repository of the list.
+Also provide the metrics of:
+    - open_issues
+    - forks
+    - watchers
+    - network_count
+    - subscribers_count
+    - last_update
+    - language
 """
 REPOS_SEARCH_MODEL = os.getenv("REPOS_SEARCH_MODEL", "gpt-4.1-mini")
 
