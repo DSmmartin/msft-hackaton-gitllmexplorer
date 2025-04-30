@@ -1,5 +1,6 @@
 import os
-from agents import Agent
+from agents import Agent, OpenAIChatCompletionsModel
+from model_client import get_model_client
 
 GENERATE_RESPONSE_SYSTEM_PROMPT = """
 You are an Agent that your Role is to generate a response for the user based on the information collected.
@@ -12,10 +13,13 @@ Guidelines:
 - In your conclussion, you have to provide the confidente level of the information that you provided.
 
 """
-GENERATE_RESPONSE_MODEL = os.getenv("GIT_ASSISTANT_MODEL", "gpt-4o-mini")
+GENERATE_RESPONSE_MODEL = os.getenv("GIT_ASSISTANT_MODEL", "gpt-4.1-mini")
 
 
-agent_generate_response = Agent(name="GenerateResponse",
-                     model=GENERATE_RESPONSE_MODEL,
-                     instructions=GENERATE_RESPONSE_SYSTEM_PROMPT
-                     )
+agent_generate_response = Agent(
+    name="GenerateResponse",
+    model=OpenAIChatCompletionsModel(
+        model=GENERATE_RESPONSE_MODEL, openai_client=get_model_client()
+    ),
+    instructions=GENERATE_RESPONSE_SYSTEM_PROMPT,
+)

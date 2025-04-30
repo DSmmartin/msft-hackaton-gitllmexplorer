@@ -1,12 +1,12 @@
 from agents import function_tool, RunContextWrapper
-from repository_assets import GitRepositoryLocation
+from repository_assets import GitRepository
 import os
 
 
 
 @function_tool
 async def read_file(
-    context: RunContextWrapper[GitRepositoryLocation],
+    context: RunContextWrapper[GitRepository],
     file_path: str) -> str:
     """Read the contents of a file in the context of a local Git repository.
 
