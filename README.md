@@ -73,3 +73,15 @@ uv run ./src/main.py
 - "Give me more information about this repository https://github.com/valory-xyz/quickstart"
 - "Make a clone of this repository and initialize it https://github.com/modelcontextprotocol/servers"
 - "Find me the best repositories about transformers"
+
+## Future steps and potential new features
+
+- Improving the Git Exploratory analisis tool which more detailed information such as:
+    1. How many active branches?
+    2. What is the branch strategy?
+    3. What is the Git Flow?
+- Packaging the tool in a cli library
+- Building a TUI for the tool (the Textual library)
+- Integrating some Git commands with the [Git MCP](https://github.com/modelcontextprotocol/servers/tree/main/src/git)
+- Adding unit tests for core functionalities
+- Building a RAG with the book "PRO GIT" by Scott Chacon and Ben Straub
