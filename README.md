@@ -1,87 +1,148 @@
-# msft-hackaton-gitllmexplorer
-Project for the AI Agents Microsoft Hackaton
+# GitLLM Explorer
+**AI-Powered CLI for Exploring Git Repositories**
 
-Goal: Create a CLI Tool that allows users to understand Git Repositories using LLM's Agents.
+## Description
 
-## Contribute
+GitLLM Explorer is an AI-powered command-line tool that leverages LLM-based agents to help developers and teams explore and understand Git repositories. By asking natural language questions, users can:
 
-### Setting up the environment with `uv`
+- Summarize a repository's purpose and structure.
+- Analyze branch activity and workflows.
+- Generate detailed repository reports.
+- Search for GitHub repositories based on topics.
 
-[`uv`](https://github.com/astral-sh/uv) is a fast Python package installer and resolver that we use for dependency management.
+## Key Features
 
-#### Installing `uv`
+- **Natural Language Interface**
+  - Ask questions in plain English; the AI translates them into Git commands or queries.
+  - Maintains conversational context for follow-up queries.
+- **Modular LLM Agents**
+  - **Setup Agent**: Clone and initialize repositories.
+  - **Commands Agent**: Execute safe Git commands and fetch data.
+  - **Report Agent**: Generate human-readable reports on repository history and structure.
+  - **Assistant Agent**: Orchestrates agent interactions for smooth workflows.
+- **Repository Insights and Analytics**
+  - Summaries based on README and code.
+  - Branch activity and merge history.
+  - Workflow strategy detection (e.g., Git Flow, GitHub Flow).
+- **Repository Search**
+  - Discover GitHub repositories by topic, stars, or activity.
+- **Asynchronous and Extensible**
+  - Built with asyncio for responsive CLI interactions.
+  - Easily extendable with new agents and tools.
+- **Configurable LLM Models**
+  - Customize each agent's model via environment variables.
 
-1. Install `uv` using the official installer:
+## Installation
 
-```bash
-curl -sSf https://install.python-uv.org | sh
-```
+### Prerequisites
 
-For Mac users follow instructions here:
-https://docs.astral.sh/uv/getting-started/installation/
+- Python 3.8 or higher
+- [uv](https://github.com/astral-sh/uv)
 
-2. Verify the installation:
+### Setup
 
-```bash
-uv --version
-```
+1. Install `uv`:
 
-#### Creating and activating the environment
+   ```bash
+   curl -sSf https://install.python-uv.org | sh
+   # On macOS, follow instructions at https://docs.astral.sh/uv/getting-started/installation/
+   ```
 
-1. Clone the repository:
+2. Clone the repository:
 
-```bash
-git clone https://github.com/DSmmartin/msft-hackaton-gitllmexplorer.git
-cd msft-hackaton-gitllmexplorer
-```
+   ```bash
+   git clone https://github.com/DSmmartin/msft-hackaton-gitllmexplorer.git
+   cd msft-hackaton-gitllmexplorer
+   ```
 
-2. Create a virtual environment:
+3. Create and activate the virtual environment:
 
-```bash
-uv sync && uv venv
-```
+   ```bash
+   uv sync && uv venv
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   ```
 
-3. Activate the virtual environment:
+4. Install dependencies:
 
-- On Linux/macOS:
-```bash
-source .venv/bin/activate
-```
+   ```bash
+   uv install
+   ```
+
+## Configuration
+
+Set the following environment variables:
+
+- `GITHUB_TOKEN`: Your GitHub token (optional; for the search functionallity).
+- Agent-specific model variables (optional; defaults to `gpt-4o-mini`):
+  - `GIT_ASSISTANT_MODEL`
+  - `GIT_COMMANDS_MODEL`
+  - `GIT_REPORT_MODEL`
+  - `GIT_SETUP_MODEL`
+  - `OPENAI_API_KEY`: Your OpenAI API key, in case you want to use the OpenAI provider.
+  - `AZURE_OPENAI_API_KEY`, `AZURE_OPENAI_API_VERSION`,  `AZURE_OPENAI_ENDPOINT`: The credentials for the Azure OpenAI provider.
 
 
-4. Prepare the environment variables with third parties
-- `OPENAI_API_KEY`: Your OpenAI API key. This is required for the application to function properly.
-- `GITHUB_TOKEN`: Your GitHub token. This is required for the application to function properly.
+## Usage
 
-5. Prepare the environment variables for the agents
-Each agent can be configured with a different model. The agent variables follow the format:
-- `__AGENT_NAME__MODEL`: 'default_model'
-These are the environmental variables for the implemented agents:
-- `GIT_ASSISTANT_MODEL`: `gpt-4o-mini`.
-- `GIT_COMMANDS_MODEL`: `gpt-4.1-mini`.
-- `GIT_REPORT_MODEL`: `gpt-4.1-mini`.
-- `GIT_SETUP_MODEL`: `gpt-4.1-mini`.
-
-6. Execute the following command to run the app:
+Run the CLI:
 
 ```bash
 uv run ./src/main.py
 ```
 
-## Some requests that you can try with the Assistant Agent:
+Once launched, type your questions about Git repositories. Type `exit` to quit.
 
-- "Give me more information about this repository https://github.com/valory-xyz/quickstart"
-- "Make a clone of this repository and initialize it https://github.com/modelcontextprotocol/servers"
-- "Find me the best repositories about transformers"
+## Examples
+
+- **Summarize a repository**:
+
+  ```bash
+  💬 Could you provide a summary about this repo based on the README? The URL is https://github.com/microsoft/promptflow.git
+  ```
+
+- **List active branches** in a local repo:
+
+  ```bash
+  💬 What are the current active branches in /path/to/repo?
+  ```
+
+- **Generate a repository report**:
+
+  ```bash
+  💬 Generate a report of the repository: https://github.com/microsoft/promptflow.git
+  ```
+
+- **Search for Python repos**:
+
+  ```bash
+  💬 Find me the best repositories about transformers
+  ```
+
+## Use Cases
+
+- **Developer Onboarding**: Quickly understand a new codebase.
+- **Branch Strategy Audits**: Analyze branch workflows (Git Flow, GitHub Flow, etc.).
+- **Project Audits**: Generate automated reports for stakeholders.
+- **Repository Discovery**: Find relevant open-source projects.
+
+## Technical Explanation
+
+![Architecture Diagram](doc/architecture.png)
+
+1. **Agent Orchestration**: Uses a Runner to sequentially call LLM agents based on responses, this is the Git Assistant and the Git Reporter when the `handoff` operations is executed.
+2. **Tools Integration**: There are other Agents used as tools that group high level tasks, these agents facilitate the execution of complex workflows.
+3. **Context Management**: Pydantic models (`GitRepository`, `ListOfRepositories`) store agent context.
+4. **Asynchronous CLI**: Built with asyncio and Rich for interactive consoles.
+
 
 ## Future steps and potential new features
 
 - Improving the Git Exploratory analisis tool which more detailed information such as:
-    1. How many active branches?
-    2. What is the branch strategy?
-    3. What is the Git Flow?
-- Packaging the tool in a cli library
+    1. The tags
+    2. Core components/folders of the repository
+    3. The main issues and pull requests
+- Packaging the tool in a CLI library
 - Building a TUI for the tool (the Textual library)
 - Integrating some Git commands with the [Git MCP](https://github.com/modelcontextprotocol/servers/tree/main/src/git)
 - Adding unit tests for core functionalities
-- Building a RAG with the book "PRO GIT" by Scott Chacon and Ben Straub
+- Building a RAG with the book "PRO GIT" by Scott Chacon and Ben Straub, in order to extend the capabilities of this tool to tutor/learning.
