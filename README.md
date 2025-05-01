@@ -146,3 +146,5 @@ Once launched, type your questions about Git repositories. Type `exit` to quit.
 - Integrating some Git commands with the [Git MCP](https://github.com/modelcontextprotocol/servers/tree/main/src/git)
 - Adding unit tests for core functionalities
 - Building a RAG with the book "PRO GIT" by Scott Chacon and Ben Straub, in order to extend the capabilities of this tool to tutor/learning.
+- Add traceability to the tool (`promptflow`), in order to track the redirections, the use of the tools and the agents, and the use of the LLMs.
+- Build a Evaluation system to evaluate the performance of the tool/agents, and the LLMs used in the tool.
