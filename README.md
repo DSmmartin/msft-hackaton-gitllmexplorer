@@ -62,11 +62,6 @@ GitLLM Explorer is an AI-powered command-line tool that leverages LLM-based agen
    source .venv/bin/activate  # On Windows: .venv\Scripts\activate
    ```
 
-4. Install dependencies:
-
-   ```bash
-   uv install
-   ```
 
 ## Configuration
 
