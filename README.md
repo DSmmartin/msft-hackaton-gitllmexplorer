@@ -44,7 +44,7 @@ GitLLM Explorer is an AI-powered command-line tool that leverages LLM-based agen
 1. Install `uv`:
 
    ```bash
-   curl -sSf https://install.python-uv.org | sh
+   curl -LsSf https://astral.sh/uv/install.sh | sh
    # On macOS, follow instructions at https://docs.astral.sh/uv/getting-started/installation/
    ```
 
@@ -95,11 +95,15 @@ Once launched, type your questions about Git repositories. Type `exit` to quit.
   💬 Could you provide a summary about this repo based on the README? The URL is https://github.com/microsoft/promptflow.git
   ```
 
+![question 1](./doc/q1.gif)
+
 - **List active branches** in a local repo:
 
   ```bash
   💬 What are the current active branches in /path/to/repo?
   ```
+
+![question 2](./doc/q2.gif)
 
 - **Generate a repository report**:
 
@@ -107,11 +111,15 @@ Once launched, type your questions about Git repositories. Type `exit` to quit.
   💬 Generate a report of the repository: https://github.com/microsoft/promptflow.git
   ```
 
+![question 3](./doc/q3.gif)
+
 - **Search for Python repos**:
 
   ```bash
   💬 Find me the best repositories about transformers
   ```
+
+![question 4](./doc/q4.gif)
 
 ## Use Cases
 
